@@ -3,8 +3,8 @@ import cv2
 import numpy as np
 from sklearn.cluster import KMeans
 
-video_name = ""
-output_name = "out.jpg"
+video_name = "mov.mp4"
+output_name = "out-kmeans.jpg"
 output_height = 680 # in px
 output_width = 1920 # Squeezing happens in this dimension
 use_avg_instead = False # If true, compute the average color of each frame instead of the dominant. 
@@ -15,10 +15,11 @@ frames = []
 output_img = []
 
 def dominant_color(frame):
-    kmeans = KMeans(n_clusters=4)
+    kmeans = KMeans(n_clusters=3)
     kmeans.fit(frame)
-    # print(kmeans.cluster_centers_)
-    return kmeans.cluster_centers_[0]
+    print(kmeans.cluster_centers_)
+    print(kmeans.labels_, len(kmeans.labels_))
+    # return kmeans.cluster_centers_[0]
 
 # Squeeze frames to OUTPUT_WIDTH total frames
 def squash():
